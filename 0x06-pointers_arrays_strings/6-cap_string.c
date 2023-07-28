@@ -1,29 +1,35 @@
 /**
  * cap_string - Capitalizes all words of a string.
- * @str: The input string.
+ * @str: The input string to be capitalized.
  *
- * Return: A pointer to the modified string.
+ * Return: A pointer to the resulting string.
  */
 char *cap_string(char *str)
 {
-    int capitalize = 1; /* Indicates whether the next character should be capitalized */
+    int i = 0;
 
-    for (int i = 0; str[i] != '\0'; i++)
+    /* Capitalize the first letter if it is a lowercase letter */
+    if (str[i] >= 'a' && str[i] <= 'z')
+        str[i] -= 'a' - 'A';
+
+    while (str[i] != '\0')
     {
-        if (capitalize && islower(str[i]))
-        {
-            str[i] = toupper(str[i]);
-        }
-
-        capitalize = 0;
-
-        /* Check for word separators */
+        /* Capitalize the letter after the specified word separators */
         if (str[i] == ' ' || str[i] == '\t' || str[i] == '\n' ||
             str[i] == ',' || str[i] == ';' || str[i] == '.' ||
             str[i] == '!' || str[i] == '?' || str[i] == '"' ||
             str[i] == '(' || str[i] == ')' || str[i] == '{' || str[i] == '}')
         {
-            capitalize = 1;
+            i++;
+            if (str[i] >= 'a' && str[i] <= 'z')
+                str[i] -= 'a' - 'A';
+        }
+        else
+        {
+            /* Convert uppercase letters in the middle of words to lowercase */
+            if (str[i] >= 'A' && str[i] <= 'Z')
+                str[i] += 'a' - 'A';
+            i++;
         }
     }
 
