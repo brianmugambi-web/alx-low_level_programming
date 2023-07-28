@@ -1,22 +1,24 @@
-#include "main.h"
-#include <stdio.h>
 /**
- *strcat - reverse q string
- *@dest: buffer tocopy string to
- *@src: the source string tocopy
+ * _strcat - Concatenates two strings
+ * @dest: The destination string
+ * @src: The source string to be appended to dest
  *
- *Return: a pointer to destination
+ * Return: Pointer to the resulting string dest
  */
-char *strcat(char *dest, const char *src)
+char *_strcat(char *dest, char *src)
 {
-int i = 0, dest_len = 0;
-while (dest[i++])
-{
-dest_len++;
-}
-for (i = 0 ; src[i] ; i++)
-{
-dest[dest_len++] = src[i];
-}
-return (dest);
+    char *ptr = dest;
+
+    while (*dest)
+        dest++;
+
+    while (*src)
+    {
+        *dest = *src;
+        dest++;
+        src++;
+    }
+
+    *dest = '\0'; /* Add null terminator at the end */
+    return ptr;
 }
